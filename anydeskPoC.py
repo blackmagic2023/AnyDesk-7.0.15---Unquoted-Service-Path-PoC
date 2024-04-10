@@ -10,10 +10,13 @@ def display_menu():
 
 def check_service_configuration():
     try:
-        output = os.popen('sc qc anydesk').read()
+        # Use wmic to get service information
+        output = subprocess.check_output('wmic service get name,pathname | findstr /i /v "C:\\Windows\\\\" | findstr /i /v """', shell=True, universal_newlines=True)
         print(output)
-    except Exception as e:
+    except subprocess.CalledProcessError as e:
         print("Error checking service configuration:", e)
+    except Exception as e:
+        print("An unexpected error occurred:", e)
 
 def view_system_information():
     try:
