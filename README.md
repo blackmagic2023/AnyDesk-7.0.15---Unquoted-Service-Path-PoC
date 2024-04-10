@@ -44,7 +44,7 @@ pip install -r requirements.txt
 - Run the Python script anydesk_poc.py using the following command:
 
 ```bash
-    python anydesk_poc.py
+    python3 anydesk_poc.py
 ```
    
 Follow the instructions provided by the script to perform various actions.
