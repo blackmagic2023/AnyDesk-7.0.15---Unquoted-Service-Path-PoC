@@ -11,7 +11,7 @@ def display_menu():
 def check_service_configuration():
     try:
         # Use wmic to get service information
-        output = subprocess.check_output('wmic service get name,pathname | findstr /i /v "C:\\Windows\\\\" | findstr /i /v """', shell=True, universal_newlines=True)
+        output = subprocess.check_output('wmic service where "name=\'anydesk\'" get name,pathname | findstr /i /v "C:\\Windows\\\\" | findstr /i /v """', shell=True, universal_newlines=True)
         print(output)
     except subprocess.CalledProcessError as e:
         print("Error checking service configuration:", e)
@@ -27,7 +27,7 @@ def view_system_information():
 
 def run_custom_command():
     try:
-        service_info = os.popen('sc qc anydesk').read()
+        service_info = subprocess.check_output('wmic service where "name=\'anydesk\'" get name,pathname | findstr /i /v "C:\\Windows\\\\" | findstr /i /v """', shell=True, universal_newlines=True)
         if '"C:\\Program Files (x86)\\AnyDesk\\AnyDesk.exe"' in service_info:
             print("Service path is correctly quoted.")
             custom_command = input("Enter the custom command to run: ")
